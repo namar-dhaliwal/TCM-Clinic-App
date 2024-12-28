@@ -34,7 +34,7 @@ router.get('/reviews/:id', (req, res) => {
     res.json({mssg: 'Request to retrieve/read singular review based on parameter id'})
 })
 
-// POST a review in popup window on homepage based on id
+// POST a review in popup window on homepage
 router.post('/reviews', (req, res) => {
     res.json({mssg: 'Request to create singular review.'})
 })
