@@ -1,4 +1,5 @@
 const express = require('express')
+const Review = require('../models/ReviewsModel')
 
 const router = express.Router()
 
@@ -35,8 +36,15 @@ router.get('/reviews/:id', (req, res) => {
 })
 
 // POST a review in popup window on homepage
-router.post('/reviews', (req, res) => {
-    res.json({mssg: 'Request to create singular review.'})
+router.post('/reviews', async (req, res) => {
+    const {reviewRating, reviewTitle, reviewBody, reviewName, reviewDate} = req.body
+
+    try {
+        const review = await Review.create({reviewRating, reviewTitle, reviewBody, reviewName, reviewDate})
+        res.status(200).json(review)
+    }   catch (error) {
+        res.status(400).json({error: error.message})
+    }
 })
 
 // DELETE a review in popup window on homepage based on id
