@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const mongoose = require('mongoose')
 const webpageRoutes = require('./routes/webpages')
 
 
@@ -19,8 +20,15 @@ app.use((req, res, next) => {
 // page routes 
 app.use('/api/pages/', webpageRoutes)
 
+// connect to db
+mongoose.connect(process.env.MONG_URI)
+    .then(() => {
+        //listen for reqs
+        app.listen(process.env.PORT, () => {
+            console.log('connected to db & listening on port', process.env.PORT)
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 
-//listen for reqs
-app.listen(process.env.PORT, () => {
-    console.log('listening on port', process.env.PORT)
-})
