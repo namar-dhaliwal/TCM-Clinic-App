@@ -13,7 +13,7 @@ const reviewSchema = new Schema({
     reviewBody: {
         type: String,
     },
-    reviewiwerName: {
+    reviewName: {
         type: String,
     },
     reviewDate: {
