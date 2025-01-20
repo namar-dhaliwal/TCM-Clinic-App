@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const webpageRoutes = require('./routes/webpages')
+const reviewRoutes = require('./routes/reviews')
 
 
 //invoke express app
@@ -19,6 +20,8 @@ app.use((req, res, next) => {
 
 // page routes 
 app.use('/api/pages/', webpageRoutes)
+// review routes, will change routing after
+app.use('/api/pages/', reviewRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONG_URI)
