@@ -8,7 +8,6 @@ const Admin = () => {
     const { user, logout } = useAuth0();
 
     const roles = user?.['https://tcm-clinic/roles'] || []
-    console.log(roles)
     if (!roles.includes('TCM Clinic Admin')) {
         logout()
         return <Navigate to="/admin/login" replace/>
