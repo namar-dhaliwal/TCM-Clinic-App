@@ -19,6 +19,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 // components
 import LogoutButton from '../components/admin/LogoutButton'
 
+// css
+import './AdminBookings.css'
+
 const locales = {
 	'en-Us': enUS,
 }
@@ -37,13 +40,13 @@ const localizer = dateFnsLocalizer({
 const initialBookings = [
 	{
 		id: 1,
-		patientName: 'John Doe',
+		title: 'John Doe',
 		start: new Date(2025, 0, 30, 10, 0),
 		end: new Date(2025, 0, 30, 11, 0),
 	},
 	{
 		id: 2,
-		patientName: 'Jane Smith',
+		title: 'Jane Smith',
 		start: new Date(2025, 0, 30, 14, 0),
 		end: new Date(2025, 0, 30, 15, 0),
 	},
@@ -108,14 +111,14 @@ const Admin = () => {
 		})
 	}
 
-	const filteredBookings = bookings.filter((booking) => {
-		const bookingDate = new Date(booking.start)
-		return (
-			bookingDate.getFullYear() === selectedDate.getFullYear() &&
-			bookingDate.getMonth() === selectedDate.getMonth() &&
-			bookingDate.getDate() === selectedDate.getDate()
-		)
-	})
+	// const filteredBookings = bookings.filter((booking) => {
+	// 	const bookingDate = new Date(booking.start)
+	// 	return (
+	// 		bookingDate.getFullYear() === selectedDate.getFullYear() &&
+	// 		bookingDate.getMonth() === selectedDate.getMonth() &&
+	// 		bookingDate.getDate() === selectedDate.getDate()
+	// 	)
+	// })
 
 	return (
 		<div className='flex flex-col items-start'>
@@ -123,7 +126,7 @@ const Admin = () => {
 				<h2>Room 1</h2>
 				<Calendar
 					localizer={localizer}
-					events={filteredBookings}
+					events={bookings}
 					startAccessor='start'
 					endAccessor='end'
 					defaultView='day'
@@ -141,7 +144,7 @@ const Admin = () => {
 						<label>Patient Name: </label>
 						<input
 							type='text'
-							name='patientName'
+							name='title'
 							value={newBooking.patientName}
 							onChange={handleInputChange}
 							required
