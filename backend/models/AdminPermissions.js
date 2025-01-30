@@ -1,5 +1,7 @@
 const AdminPermissions = {
-    Read: "read:admin-messages",
+    Read: "read:bookings",
+    Update: "update:bookings",
+    Delete: "delete:bookings",
 }
 
 module.exports =  {
