@@ -1,4 +1,4 @@
-import LoginButton from "../components/admin/LoginButton";
+import LoginButton from "../../components/admin/LoginButton";
 
 const AdminLogin = () => {
     
