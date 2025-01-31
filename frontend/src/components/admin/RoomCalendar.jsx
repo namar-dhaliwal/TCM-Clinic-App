@@ -11,6 +11,7 @@ import {
 } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
+import './RoomCalendar.css'
 
 // context
 import { useDateContext } from '../../context/admin/DateContext'
@@ -31,7 +32,7 @@ const localizer = dateFnsLocalizer({
 })
 
 const RoomCalendar = ({ initialBookings, title }) => {
-    const { selectedDate, setSelectedDate } = useDateContext()
+	const { selectedDate, setSelectedDate } = useDateContext()
 	const [bookings, setBookings] = useState(initialBookings)
 
 	const handleDateChange = (date) => {
@@ -39,16 +40,12 @@ const RoomCalendar = ({ initialBookings, title }) => {
 	}
 
 	const handleSelectSlot = (slotInfo) => {
-		setNewBooking({
-			...newBooking,
-			start: slotInfo.start,
-			end: slotInfo.end,
-		})
+        console.log(slotInfo)
 	}
 
 	return (
 		<div className='flex flex-col items-center'>
-            <h2 className='font-bold text-xl underline'>{title}</h2>
+			<h2 className='font-bold text-xl underline'>{title}</h2>
 			<Calendar
 				localizer={localizer}
 				events={bookings}
@@ -59,7 +56,10 @@ const RoomCalendar = ({ initialBookings, title }) => {
 				onNavigate={handleDateChange}
 				selectable
 				onSelectSlot={handleSelectSlot}
-				style={{ height: 500, width: 800 }}
+                views={['month', 'week','day']}
+                min={new Date(2025, 0, 1, 8, 0, 0)}
+                max={new Date(2025, 0, 1, 19, 0, 0)}
+				style={{ maxHeight: 500 }}
 			/>
 		</div>
 	)

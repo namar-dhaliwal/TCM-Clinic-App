@@ -7,7 +7,7 @@ import LogoutButton from '../../components/admin/LogoutButton'
 import RoomCalendar from '../../components/admin/RoomCalendar'
 
 // css
-import './AdminBookings.css'
+
 import { DateProvider } from '../../context/admin/DateContext'
 
 const initialBookingsOne = [
@@ -87,11 +87,11 @@ const Admin = () => {
 
 	return (
 		<DateProvider>
-			<div className='flex flex-col pt-4'>
+			<div className='flex flex-col w-screen pt-4'>
 				<div className='flex self-end mr-8'>
 					<LogoutButton />
 				</div>
-				<div className='flex w-full justify-evenly '>
+				<div className='flex flex-wrap w-full justify-evenly gap-2'>
 					<RoomCalendar
 						initialBookings={initialBookingsOne}
 						title='Room 1'
