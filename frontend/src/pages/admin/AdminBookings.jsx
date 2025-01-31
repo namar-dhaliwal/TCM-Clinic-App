@@ -6,42 +6,13 @@ import { useState } from 'react'
 import LogoutButton from '../../components/admin/LogoutButton'
 import RoomCalendar from '../../components/admin/RoomCalendar'
 
-// css
-
+// context / providers
 import { DateProvider } from '../../context/admin/DateContext'
-
-const initialBookingsOne = [
-	{
-		id: 1,
-		title: 'John Doe',
-		start: new Date(2025, 0, 30, 10, 0),
-		end: new Date(2025, 0, 30, 11, 0),
-	},
-	{
-		id: 2,
-		title: 'Jane Smith',
-		start: new Date(2025, 0, 30, 14, 0),
-		end: new Date(2025, 0, 30, 15, 0),
-	},
-]
-
-const initialBookingsTwo = [
-	{
-		id: 1,
-		title: 'John Doe',
-		start: new Date(2025, 0, 31, 10, 0),
-		end: new Date(2025, 0, 31, 11, 0),
-	},
-	{
-		id: 2,
-		title: 'Jane Smith',
-		start: new Date(2025, 0, 31, 14, 0),
-		end: new Date(2025, 0, 31, 15, 0),
-	},
-]
+import { useBookingsContext } from '../../context/admin/BookingsContext'
 
 const Admin = () => {
 	const { user, logout } = useAuth0()
+	const { state } = useBookingsContext()
 
 	const roles = user?.['https://tcm-clinic/roles'] || []
 	if (!roles.includes('TCM Clinic Admin')) {
@@ -87,71 +58,71 @@ const Admin = () => {
 
 	return (
 		<DateProvider>
-			<div className='flex flex-col w-screen pt-4'>
-				<div className='flex self-end mr-8'>
-					<LogoutButton />
+				<div className='flex flex-col w-screen pt-4'>
+					<div className='flex self-end mr-8'>
+						<LogoutButton />
+					</div>
+					<div className='flex flex-wrap w-full justify-evenly gap-2'>
+						<RoomCalendar
+							initialBookings={state.rooms[0].bookings}
+							title={state.rooms[0].name}
+						/>
+						<RoomCalendar
+							initialBookings={state.rooms[1].bookings}
+							title={state.rooms[1].name}
+						/>
+					</div>
+					<div className='flex flex-col items-center m-auto mt-4'>
+						<h2>Create Booking</h2>
+						<form onSubmit={handleSubmit}>
+							<div>
+								<label>Patient Name: </label>
+								<input
+									type='text'
+									name='title'
+									value={newBooking.patientName}
+									onChange={handleInputChange}
+									required
+								/>
+							</div>
+							<div>
+								<label>Start Time: </label>
+								<input
+									type='datetime-local'
+									name='start'
+									value={
+										newBooking.start
+											? format(
+													newBooking.start,
+													"yyyy-MM-dd'T'HH:mm"
+											  )
+											: ''
+									}
+									onChange={handleInputChange}
+									required
+								/>
+							</div>
+							<div>
+								<label>End Time: </label>
+								<input
+									type='datetime-local'
+									name='end'
+									value={
+										newBooking.end
+											? format(
+													newBooking.end,
+													"yyyy-MM-dd'T'HH:mm"
+											  )
+											: ''
+									}
+									onChange={handleInputChange}
+									required
+								/>
+							</div>
+							<button type='submit'>Book</button>
+						</form>
+					</div>
 				</div>
-				<div className='flex flex-wrap w-full justify-evenly gap-2'>
-					<RoomCalendar
-						initialBookings={initialBookingsOne}
-						title='Room 1'
-					/>
-					<RoomCalendar
-						initialBookings={initialBookingsTwo}
-						title='Room 2'
-					/>
-				</div>
-				<div className='flex flex-col items-center m-auto mt-4'>
-					<h2>Create Booking</h2>
-					<form onSubmit={handleSubmit}>
-						<div>
-							<label>Patient Name: </label>
-							<input
-								type='text'
-								name='title'
-								value={newBooking.patientName}
-								onChange={handleInputChange}
-								required
-							/>
-						</div>
-						<div>
-							<label>Start Time: </label>
-							<input
-								type='datetime-local'
-								name='start'
-								value={
-									newBooking.start
-										? format(
-												newBooking.start,
-												"yyyy-MM-dd'T'HH:mm"
-										  )
-										: ''
-								}
-								onChange={handleInputChange}
-								required
-							/>
-						</div>
-						<div>
-							<label>End Time: </label>
-							<input
-								type='datetime-local'
-								name='end'
-								value={
-									newBooking.end
-										? format(
-												newBooking.end,
-												"yyyy-MM-dd'T'HH:mm"
-										  )
-										: ''
-								}
-								onChange={handleInputChange}
-								required
-							/>
-						</div>
-						<button type='submit'>Book</button>
-					</form>
-				</div>
-			</div>
 		</DateProvider>
 	)
 }
