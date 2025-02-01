@@ -12,17 +12,18 @@ const customStyles = {
 		bottom: 'auto',
 		marginRight: '-50%',
 		transform: 'translate(-50%, -50%)',
+		padding: '2rem 3rem',
 	},
 }
+
+const durationValues = [15, 30, 60, 90, 120]
 
 Modal.setAppElement('#root')
 
 const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 	const { state, dispatch } = useBookingsContext()
 	const [patientName, setPatientName] = useState('')
-	const [start, setStart] = useState(
-		defaultStart ? defaultStart : new Date()
-	)
+	const [start, setStart] = useState(defaultStart ? defaultStart : new Date())
 	const [duration, setDuration] = useState(30)
 	const [end, setEnd] = useState(new Date(defaultStart + 30 * 60000))
 
@@ -58,6 +59,7 @@ const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 			},
 		})
 
+		onClose()
 		setPatientName('')
 	}
 
@@ -67,42 +69,57 @@ const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 			onRequestClose={onClose}
 			contentLabel='Add Booking'
 			style={customStyles}>
-			<h2>Add Booking</h2>
-			<form onSubmit={handleSubmit}>
-				<div>
+			<h2 className='font-bold underline text-center mb-4'>
+				Add Booking
+			</h2>
+			<form onSubmit={handleSubmit} className='flex flex-col gap-1'>
+				<div className='flex gap-2'>
 					<label>Patient Name: </label>
 					<input
 						type='text'
 						value={patientName}
 						onChange={(e) => setPatientName(e.target.value)}
 						required
+						className='border border-black rounded-md flex-1 pl-1'
 					/>
 				</div>
-				<div>
+				<div className='flex gap-2'>
 					<label>Start Time: </label>
 					<input
 						type='datetime-local'
 						value={format(start, "yyyy-MM-dd'T'HH:mm")}
 						onChange={(e) => setStart(new Date(e.target.value))}
+						className='border border-black rounded-md flex-1 pl-1 text-right'
 					/>
 				</div>
-				<div>
+				<div className='flex gap-2'>
 					<label>Duration (minutes): </label>
-					<input
-						type='text'
+					<select
 						value={duration}
 						onChange={(e) => setDuration(Number(e.target.value))}
-						required
+						className='border border-black rounded-md flex-1 pl-1 text-right'>
+						{durationValues.map((value) => (
+							<option key={value} value={value}>
+								{value}
+							</option>
+						))}
+					</select>
+				</div>
+				<div className='flex gap-2'>
+					<label>End Time: </label>
+					<input
+						type='datetime-local'
+						value={format(end, "yyyy-MM-dd'T'HH:mm")}
+						readOnly
+						className='border border-gray-400 rounded-md flex-1 pl-3 text-center'
 					/>
 				</div>
-				<div>
-					<label>End Time: </label>
-					<input type='datetime-local' value={format(end, "yyyy-MM-dd'T'HH:mm")} readOnly />
+				<div className='m-auto flex gap-4 mt-4'>
+					<button type='submit' className='border rounded-md border-green-600 px-4 py-1 text-green-600'>Save</button>
+					<button type='button' onClick={onClose} className='border rounded-md border-black px-4 py-1 '>
+						Cancel
+					</button>
 				</div>
-				<button type='submit'>Save</button>
-				<button type='button' onClick={onClose}>
-					Cancel
-				</button>
 			</form>
 		</Modal>
 	)

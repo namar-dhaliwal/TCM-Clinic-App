@@ -48,7 +48,6 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 	}
 
 	const handleViewChange = (newView) => {
-		console.log('hi')
 		setView(newView)
 	}
 
