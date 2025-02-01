@@ -35,7 +35,7 @@ const localizer = dateFnsLocalizer({
 	locales,
 })
 
-const RoomCalendar = ({ roomId }) => {
+const RoomCalendar = ({ roomId, view, setView }) => {
 	const { selectedDate, setSelectedDate } = useDateContext()
 	const { state } = useBookingsContext()
 	const [isModalOpen, setIsModalOpen] = useState(false)
@@ -43,8 +43,13 @@ const RoomCalendar = ({ roomId }) => {
 
 	const currentRoom = state.rooms.find((room) => room.id === roomId)
 
-	const handleDateChange = (date) => {
-		setSelectedDate(date)
+	const handleDateChange = (newDate) => {
+		setSelectedDate(newDate)
+	}
+
+	const handleViewChange = (newView) => {
+		console.log('hi')
+		setView(newView)
 	}
 
 	const handleSelectSlot = (slotInfo) => {
@@ -72,6 +77,8 @@ const RoomCalendar = ({ roomId }) => {
 				startAccessor='start'
 				endAccessor='end'
 				defaultView='day'
+				view={view}
+				onView={handleViewChange}
 				date={selectedDate}
 				onNavigate={handleDateChange}
 				selectable
@@ -79,7 +86,7 @@ const RoomCalendar = ({ roomId }) => {
 				views={['month', 'week', 'day']}
 				min={new Date(2025, 0, 1, 8, 0, 0)}
 				max={new Date(2025, 0, 1, 19, 0, 0)}
-				style={{ maxHeight: 500 }}
+				style={{ height: 500 }}
 				className='z-0'
 			/>
 		</div>

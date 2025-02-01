@@ -11,8 +11,8 @@ const initialState = {
 				{
 					id: 1,
 					title: 'John Doe',
-					start: new Date(2025, 1, 1, 10, 0),
-					end: new Date(2025, 1, 1, 11, 0),
+					start: new Date(2025, 1, 2, 10, 0),
+					end: new Date(2025, 1, 2, 11, 0),
 				},
 			],
 		},
@@ -23,8 +23,8 @@ const initialState = {
 				{
 					id: 1,
 					title: 'Jane Smith',
-					start: new Date(2025, 1, 1, 13, 0),
-					end: new Date(2025, 1, 1, 14, 0),
+					start: new Date(2025, 1, 2, 13, 0),
+					end: new Date(2025, 1, 2, 14, 0),
 				},
 			],
 		},

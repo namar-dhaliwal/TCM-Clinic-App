@@ -11,6 +11,7 @@ import { DateProvider } from '../../context/admin/DateContext'
 
 const Admin = () => {
 	const { user, logout } = useAuth0()
+	const [ view, setView ] = useState('day')
 
 	const roles = user?.['https://tcm-clinic/roles'] || []
 	if (!roles.includes('TCM Clinic Admin')) {
@@ -27,9 +28,13 @@ const Admin = () => {
 					<div className='flex flex-wrap w-full justify-evenly gap-2'>
 						<RoomCalendar
 							roomId='room-1'
+							view={view}
+							setView={setView}
 						/>
 						<RoomCalendar
 							roomId='room-2'
+							view={view}
+							setView={setView}
 						/>
 					</div>
 				</div>
