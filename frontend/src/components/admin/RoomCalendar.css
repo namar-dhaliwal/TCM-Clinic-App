@@ -1,3 +1,7 @@
 .rbc-event-label {
     display: none;
 }
+
+.rbc-events-container {
+    width: 100%;
+}

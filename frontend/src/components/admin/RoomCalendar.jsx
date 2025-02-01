@@ -19,6 +19,7 @@ import BookingModal from './BookingModal'
 // context
 import { useDateContext } from '../../context/admin/DateContext'
 import { useBookingsContext } from '../../context/admin/BookingsContext'
+import CustomEvent from './CustomEvent'
 
 const locales = {
 	'en-Us': enUS,
@@ -40,8 +41,16 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 	const { state } = useBookingsContext()
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedSlotStart, setSelectedSlot] = useState(null)
-
 	const currentRoom = state.rooms.find((room) => room.id === roomId)
+
+	// custom calendar components
+	const components = {
+		event: ({ event }) => {
+			const data = event.data
+
+			return <CustomEvent booking={data} />
+		},
+	}
 
 	const handleDateChange = (newDate) => {
 		setSelectedDate(newDate)
@@ -85,8 +94,9 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 				views={['month', 'week', 'day']}
 				min={new Date(2025, 0, 1, 8, 0, 0)}
 				max={new Date(2025, 0, 1, 19, 0, 0)}
-				style={{ height: 500 }}
+				style={{ height: 600 }}
 				className='z-0'
+				components={components}
 			/>
 		</div>
 	)

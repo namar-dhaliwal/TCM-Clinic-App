@@ -10,9 +10,12 @@ const initialState = {
 			bookings: [
 				{
 					id: 1,
-					title: 'John Doe',
 					start: new Date(2025, 1, 2, 10, 0),
 					end: new Date(2025, 1, 2, 11, 0),
+					data: {
+						doctorName: 'Dr. John Doe',
+						patientName: 'John Smith',
+					}
 				},
 			],
 		},
@@ -22,9 +25,12 @@ const initialState = {
 			bookings: [
 				{
 					id: 1,
-					title: 'Jane Smith',
 					start: new Date(2025, 1, 2, 13, 0),
 					end: new Date(2025, 1, 2, 14, 0),
+					data: {
+						doctorName: 'Dr. Jane Doe',
+						patientName: 'Jane Smith',
+					}
 				},
 			],
 		},
