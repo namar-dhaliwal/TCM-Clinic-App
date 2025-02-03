@@ -81,7 +81,7 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 				</p>
 			</div>
 
-			<div className='flex justify-between'>
+			<div className='flex min-w-[20rem] justify-between'>
 				<h2 className='text-center text-xl underline underline-offset-1'>
 					Booking Details
 				</h2>
@@ -102,7 +102,11 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 							<button onClick={() => setIsEditing(false)}>
 								Cancel
 							</button>
-							<button onClick={handleUpdateBooking} className='text-green-500'>Save</button>
+							<button
+								onClick={handleUpdateBooking}
+								className='text-green-500'>
+								Save
+							</button>
 						</>
 					)}
 				</div>
@@ -124,9 +128,9 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 					</div>
 				</>
 			) : (
-				<>
-					<div>
-						<label>Doctor: </label>
+				<div className='flex flex-col gap-1'>
+					<div className='flex gap-2'>
+						<label className='font-bold'>Doctor: </label>
 						<input
 							type='text'
 							defaultValue={event.data.doctorName}
@@ -136,10 +140,11 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 									doctorName: e.target.value,
 								})
 							}
+							className='border border-black rounded-md pl-1 flex-1'
 						/>
 					</div>
-					<div>
-						<label>Patient: </label>
+					<div className='flex gap-2'>
+						<label className='font-bold'>Patient: </label>
 						<input
 							type='text'
 							defaultValue={event.data.patientName}
@@ -149,18 +154,23 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 									patientName: e.target.value,
 								})
 							}
+							className='border border-black rounded-md pl-1 flex-1'
 						/>
 					</div>
 					<div>
-						<label className='flex flex-col'>Other Notes</label>
+						<label className='font-bold underline'>Other Notes</label>
 						<textarea
 							defaultValue={event.data.otherNotes}
-							onChange={(e) => setFormData({
-								...formData,
-								otherNotes: e.target.value,
-							})}></textarea>
+							onChange={(e) =>
+								setFormData({
+									...formData,
+									otherNotes: e.target.value,
+								})
+							}
+							className='w-full border border-black rounded-md pl-1'
+						/>
 					</div>
-				</>
+				</div>
 			)}
 		</Modal>
 	)
