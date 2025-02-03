@@ -26,11 +26,10 @@ router.get("/:date", async (req, res) => {
 //POST a new booking
 router.post("/", async (req, res) => {
   try {
-    const { patientName, doctorName, date, startTime, endTime } = req.body;
+    const { patientName, doctorName, startTime, endTime } = req.body;
     const newBooking = new Booking({
       patientName,
       doctorName,
-      date,
       startTime,
       endTime,
     });
