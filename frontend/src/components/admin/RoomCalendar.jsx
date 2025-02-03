@@ -95,8 +95,10 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 				min={new Date(2025, 0, 1, 8, 0, 0)}
 				max={new Date(2025, 0, 1, 19, 0, 0)}
 				style={{ height: 600 }}
-				className='z-0'
+				className='lg:min-w-[36rem] '
 				components={components}
+				steps={15}
+				timeslots={4}
 			/>
 		</div>
 	)
