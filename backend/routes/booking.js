@@ -12,7 +12,9 @@ router.get("/", async (req, res) => {
   }
 });
 
+// legacy code, not working with new date format
 //GET bookings by date
+/*
 router.get("/:date", async (req, res) => {
   try {
     const { date } = req.params;
@@ -22,6 +24,7 @@ router.get("/:date", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+*/
 
 //POST a new booking
 router.post("/", async (req, res) => {
