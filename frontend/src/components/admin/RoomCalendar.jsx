@@ -76,8 +76,6 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 	const handleEventDoubleClick = (event) => {
 		setIsEventModalOpen(true)
 		setEventData(event)
-		console.log(event)
-		return
 	}
 
 	return (

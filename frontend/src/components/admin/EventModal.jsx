@@ -17,8 +17,7 @@ const customStyles = {
 
 Modal.setAppElement('#root')
 
-const EventModal = ({event, isOpen, onClose}) => {
-
+const EventModal = ({ event, isOpen, onClose }) => {
 	if (!event) {
 		return null
 	}
@@ -30,11 +29,11 @@ const EventModal = ({event, isOpen, onClose}) => {
 			contentLabel='Event Modal'
 			style={customStyles}>
 			<h2>Doctor: {event?.data.doctorName}</h2>
-                <h2>Patient: {event?.data.patientName}</h2>
-                <div>
-                    <h2>Other notes</h2>
-                    <p>{event?.data.otherNotes}</p>
-                </div>
+			<h2>Patient: {event?.data.patientName}</h2>
+			<div>
+				<h2>Other notes</h2>
+				<p>{event?.data.otherNotes}</p>
+			</div>
 		</Modal>
 	)
 }
