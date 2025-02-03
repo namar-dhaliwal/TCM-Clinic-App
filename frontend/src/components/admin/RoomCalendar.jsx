@@ -97,7 +97,7 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 				style={{ height: 600 }}
 				className='lg:min-w-[36rem] '
 				components={components}
-				steps={15}
+				step={15}
 				timeslots={4}
 			/>
 		</div>
