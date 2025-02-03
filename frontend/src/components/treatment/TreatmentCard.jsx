@@ -1,4 +1,5 @@
 import React from 'react'
+import TreatmentDialog from './TreatmentDialog'
 
 const TreatmentCard = ({ imageUrl = '', cardTitle = ''}) => {
     const transitionStyle = 'transition-all ease-in-out duration-300'
@@ -12,9 +13,7 @@ const TreatmentCard = ({ imageUrl = '', cardTitle = ''}) => {
             </h1>
 
             <div className='flex flex-col justify-center items-center w-fit'>
-                <button className='font-semibold text-white text-center text-sm'>
-                    Learn more
-                </button> {/* This will be changed to a dialog*/}
+                <TreatmentDialog dialogTitle={cardTitle}/>
 
                 <span className={`mt-1 w-5/12 h-0.5 bg-blue-500 group-hover:w-full ${transitionStyle}`}/>
             </div>
