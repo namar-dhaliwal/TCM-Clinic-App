@@ -1,17 +1,15 @@
 import TreatmentCard from "../components/treatment/TreatmentCard"
-import bandAid from '../assets/images/band-aid.png'
+import tempTreatmentData from '../data/tempTreatData.json'
 
 const Treatments = () => {
 
+    console.log(tempTreatmentData)
+
     return (
         <div className="flex w-full p-8 gap-4 flex-wrap align-middle">
-            <TreatmentCard imageUrl={bandAid} cardTitle={'ACC Assessments'}/>
-            <TreatmentCard imageUrl={bandAid} cardTitle={'Accident and injury management'}/>
-            <TreatmentCard imageUrl={bandAid} cardTitle={'Accident and injury management'}/>
-            <TreatmentCard imageUrl={bandAid} cardTitle={'Accident and injury management'}/>
-            <TreatmentCard imageUrl={bandAid} cardTitle={'Accident and injury management'}/>
-            <TreatmentCard imageUrl={bandAid} cardTitle={'Accident and injury management'}/>
-            <TreatmentCard imageUrl={bandAid} cardTitle={'Accident and injury management'}/>
+            {tempTreatmentData.map((treatment, index) => (
+                <TreatmentCard key={ index } imageUrl={ treatment.card_icon } cardTitle={treatment.treatment}/>
+            ))}
         </div>
     )
   }
