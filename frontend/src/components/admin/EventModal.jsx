@@ -34,12 +34,30 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 	})
 
 	const handleDelete = () => {
-		console.log('delete booking')
 		onClose()
 		dispatch({
 			type: 'DELETE_BOOKING',
 			payload: { roomId, bookingId: event.id },
 		})
+	}
+
+	const handleUpdateBooking = () => {
+		dispatch({
+			type: 'EDIT_BOOKING',
+			payload: {
+				roomId,
+				booking: {
+					...event,
+					data: {
+						doctorName: formData.doctorName,
+						patientName: formData.patientName,
+						otherNotes: formData.otherNotes,
+					},
+				},
+			},
+		})
+		setIsEditing(false)
+		onClose()
 	}
 
 	return (
@@ -84,7 +102,7 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 							<button onClick={() => setIsEditing(false)}>
 								Cancel
 							</button>
-							<button className='text-green-500'>Save</button>
+							<button onClick={handleUpdateBooking} className='text-green-500'>Save</button>
 						</>
 					)}
 				</div>
@@ -111,7 +129,7 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 						<label>Doctor: </label>
 						<input
 							type='text'
-							value={formData.doctorName}
+							defaultValue={event.data.doctorName}
 							onChange={(e) =>
 								setFormData({
 									...formData,
@@ -124,7 +142,7 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 						<label>Patient: </label>
 						<input
 							type='text'
-							value={formData.patientName}
+							defaultValue={event.data.patientName}
 							onChange={(e) =>
 								setFormData({
 									...formData,
@@ -136,7 +154,7 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 					<div>
 						<label className='flex flex-col'>Other Notes</label>
 						<textarea
-							value={formData.otherNotes}
+							defaultValue={event.data.otherNotes}
 							onChange={(e) => setFormData({
 								...formData,
 								otherNotes: e.target.value,
