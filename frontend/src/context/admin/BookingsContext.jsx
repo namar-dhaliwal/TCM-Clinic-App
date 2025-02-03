@@ -15,6 +15,7 @@ const initialState = {
 					data: {
 						doctorName: 'Dr. John Doe',
 						patientName: 'John Smith',
+						otherNotes: 'Patient has a history of high blood pressure',
 					}
 				},
 			],
@@ -30,6 +31,7 @@ const initialState = {
 					data: {
 						doctorName: 'Dr. Jane Doe',
 						patientName: 'Jane Smith',
+						otherNotes: 'Patient has a history of low blood pressure',
 					}
 				},
 			],

@@ -8,6 +8,7 @@ import {
 	startOfWeek,
 	endOfWeek,
 	getDay,
+	set,
 } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
@@ -20,6 +21,7 @@ import BookingModal from './BookingModal'
 import { useDateContext } from '../../context/admin/DateContext'
 import { useBookingsContext } from '../../context/admin/BookingsContext'
 import CustomEvent from './CustomEvent'
+import EventModal from './EventModal'
 
 const locales = {
 	'en-Us': enUS,
@@ -39,7 +41,9 @@ const localizer = dateFnsLocalizer({
 const RoomCalendar = ({ roomId, view, setView }) => {
 	const { selectedDate, setSelectedDate } = useDateContext()
 	const { state } = useBookingsContext()
-	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
+	const [isEventModalOpen, setIsEventModalOpen] = useState(false)
+	const [eventData, setEventData] = useState(null)
 	const [selectedSlotStart, setSelectedSlot] = useState(null)
 	const currentRoom = state.rooms.find((room) => room.id === roomId)
 
@@ -66,18 +70,18 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 		}
 
 		setSelectedSlot(slotInfo.start)
-		setIsModalOpen(true)
+		setIsBookingModalOpen(true)
+	}
+
+	const handleEventDoubleClick = (event) => {
+		setIsEventModalOpen(true)
+		setEventData(event)
+		console.log(event)
+		return
 	}
 
 	return (
 		<div className='flex flex-col items-center'>
-			<BookingModal
-				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
-				defaultStart={selectedSlotStart}
-				roomId={roomId}
-				className='z-10'
-			/>
 			<h2 className='font-bold text-xl underline'>{currentRoom.name}</h2>
 			<Calendar
 				localizer={localizer}
@@ -99,6 +103,19 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 				components={components}
 				step={15}
 				timeslots={4}
+				onDoubleClickEvent={handleEventDoubleClick}
+			/>
+			<BookingModal
+				isOpen={isBookingModalOpen}
+				onClose={() => setIsBookingModalOpen(false)}
+				defaultStart={selectedSlotStart}
+				roomId={roomId}
+				className='z-10'
+			/>
+			<EventModal
+				event={eventData}
+				isOpen={isEventModalOpen}
+				onClose={() => setIsEventModalOpen(false)}
 			/>
 		</div>
 	)
