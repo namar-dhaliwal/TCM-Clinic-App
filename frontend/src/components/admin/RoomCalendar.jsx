@@ -97,7 +97,7 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 				min={new Date(2025, 0, 1, 8, 0, 0)}
 				max={new Date(2025, 0, 1, 19, 0, 0)}
 				style={{ height: 600 }}
-				className='lg:min-w-[36rem] '
+				className='lg:min-w-[36rem] z-0'
 				components={components}
 				step={15}
 				timeslots={4}
@@ -114,6 +114,8 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 				event={eventData}
 				isOpen={isEventModalOpen}
 				onClose={() => setIsEventModalOpen(false)}
+				roomId={roomId}
+				className='z-10'
 			/>
 		</div>
 	)

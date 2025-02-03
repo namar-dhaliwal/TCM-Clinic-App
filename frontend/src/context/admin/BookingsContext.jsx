@@ -48,6 +48,13 @@ const BookingsReducer = (state, action) => {
                 }
                 return room;
             }) }
+		case 'DELETE_BOOKING':
+			return { ...state, rooms: state.rooms.map((room) => {
+				if (room.id === action.payload.roomId) {
+					return {...room, bookings: room.bookings.filter((booking) => booking.id !== action.payload.bookingId)}
+				}
+				return room;
+			}) }
 	}
 }
 

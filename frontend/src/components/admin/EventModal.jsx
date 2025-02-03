@@ -1,5 +1,7 @@
 import Modal from 'react-modal'
 
+import { useBookingsContext } from '../../context/admin/BookingsContext'
+
 const customStyles = {
 	content: {
 		top: '50%',
@@ -17,9 +19,17 @@ const customStyles = {
 
 Modal.setAppElement('#root')
 
-const EventModal = ({ event, isOpen, onClose }) => {
+const EventModal = ({ event, isOpen, onClose, roomId }) => {
 	if (!event) {
 		return null
+	}
+
+	const { dispatch } = useBookingsContext()
+
+	const handleDelete = () => {
+		console.log('delete booking')
+		onClose()
+		dispatch({ type: 'DELETE_BOOKING', payload: { roomId, bookingId: event.id } })
 	}
 
 	return (
@@ -28,6 +38,10 @@ const EventModal = ({ event, isOpen, onClose }) => {
 			onRequestClose={onClose}
 			contentLabel='Event Modal'
 			style={customStyles}>
+			<div className='flex self-end gap-2'>
+				<button>Edit</button>
+				<button onClick={handleDelete} className='text-red-500'>Delete</button>
+			</div>
 			<h2>Doctor: {event?.data.doctorName}</h2>
 			<h2>Patient: {event?.data.patientName}</h2>
 			<div>
