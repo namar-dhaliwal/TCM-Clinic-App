@@ -3,60 +3,70 @@
         "treatment": "Acupuncture",
         "card_icon": "/assets/images/acupuncture.png",
         "dialog_image": "https://images.unsplash.com/photo-1512290746430-3ffb4fab31bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "treatment_description": "Acupuncture is a traditional Chinese therapy that involves inserting fine needles into specific points on the body to restore balance and promote healing. It helps relieve pain, reduce stress, improve circulation, and support overall wellness. It is commonly used for conditions like chronic pain, migraines, and anxiety."
+        "treatment_description": "Acupuncture is a traditional Chinese therapy that involves inserting fine needles into specific points on the body to restore balance and promote healing.",
+        "treatment_effects": "It helps relieve pain, reduce stress, improve circulation, and support overall wellness. It is commonly used for conditions like chronic pain, migraines, and anxiety."
     },
     {
         "treatment": "Tui Na",
         "card_icon": "/assets/images/tui-na.png",
         "dialog_image": "https://images.unsplash.com/photo-1570174006382-148305ce4972?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "treatment_description": "Tui Na is a form of therapeutic Chinese massage that combines acupressure and manual techniques to promote healing and balance. By stimulating specific points and manipulating the body’s joints, Tui Na helps relieve pain, improve circulation, and restore energy flow. It is commonly used for musculoskeletal issues, pain relief, and overall wellness."
+        "treatment_description": "Tui Na is a form of therapeutic Chinese massage that combines acupressure and manual techniques to promote healing and balance.",
+        "treatment_effects": "By stimulating specific points and manipulating the body’s joints, Tui Na helps relieve pain, improve circulation, and restore energy flow. It is commonly used for musculoskeletal issues, pain relief, and overall wellness."
     },
     {
         "treatment": "Herbal Medicine",
         "card_icon": "/assets/images/herbal-medicine.png",
         "dialog_image": "https://images.unsplash.com/photo-1492552085122-36706c238263?q=80&w=1797&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "treatment_description": "Herbal medicine uses natural plants and herbs to support the body’s healing process and restore balance. In Traditional Chinese Medicine, herbs are carefully selected and blended to address specific health concerns such as digestive issues, immunity, and stress. It is a holistic approach aimed at enhancing overall wellness and promoting long-term health."
+        "treatment_description": "Herbal medicine uses natural plants and herbs to support the body’s healing process and restore balance.",
+        "treatment_effects": "In Traditional Chinese Medicine, herbs are carefully selected and blended to address specific health concerns such as digestive issues, immunity, and stress. It is a holistic approach aimed at enhancing overall wellness and promoting long-term health."
     },
     {
         "treatment": "Cupping",
         "card_icon": "/assets/images/cupping.png",
         "dialog_image": "https://images.unsplash.com/photo-1598555748505-ccca0d9b9f7b?q=80&w=1797&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "treatment_description": "Cupping therapy involves placing special cups on the skin to create suction, which helps improve circulation, relieve pain, and reduce muscle tension. This technique is commonly used to treat conditions like back pain, respiratory issues, and stress, promoting overall relaxation and healing."
+        "treatment_description": "Cupping therapy involves placing special cups on the skin to create suction, which helps improve circulation, relieve pain, and reduce muscle tension.",
+        "treatment_effects": "This technique is commonly used to treat conditions like back pain, respiratory issues, and stress, promoting overall relaxation and healing."
     },
     {
         "treatment": "Moxibustion",
         "card_icon": "/assets/images/moxibustion.png",
         "dialog_image": "https://images.pexels.com/photos/8139405/pexels-photo-8139405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "treatment_description": "Moxibustion is a traditional Chinese therapy that involves burning dried mugwort near specific acupuncture points to warm and stimulate the body. It helps improve circulation, boost immunity, and alleviate pain. Often used alongside acupuncture, moxibustion is effective for treating conditions like fatigue, digestive issues, and joint pain."
+        "treatment_description": "Moxibustion is a traditional Chinese therapy that involves burning dried mugwort near specific acupuncture points to warm and stimulate the body.",
+        "treatment_effects": "It helps improve circulation, boost immunity, and alleviate pain. Often used alongside acupuncture, moxibustion is effective for treating conditions like fatigue, digestive issues, and joint pain."
     },
     {
         "treatment": "Women's Health",
         "card_icon": "/assets/images/women-health.png",
         "dialog_image": "https://images.pexels.com/photos/5215000/pexels-photo-5215000.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "treatment_description": "Chinese medicine offers a holistic approach to women’s health, addressing issues such as menstrual irregularities, fertility, pregnancy, and menopause. Through acupuncture, herbal medicine, and lifestyle recommendations, we aim to restore balance and support overall well-being at every stage of life."
+        "treatment_description": "Chinese medicine offers a holistic approach to women’s health, addressing issues such as menstrual irregularities, fertility, pregnancy, and menopause.",
+        "treatment_effects": "Through acupuncture, herbal medicine, and lifestyle recommendations, we aim to restore balance and support overall well-being at every stage of life."
     },
     {
         "treatment": "Cosmetic Acupuncture",
         "card_icon": "/assets/images/cosmetic-acupuncture.png",
         "dialog_image": "https://images.pexels.com/photos/6076148/pexels-photo-6076148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "treatment_description": "Cosmetic acupuncture is a natural, non-invasive treatment that enhances skin health and reduces the signs of aging. By stimulating specific points on the face, it promotes circulation, boosts collagen production, and helps reduce wrinkles, puffiness, and fine lines. It’s a holistic approach to achieving a youthful, radiant complexion."
+        "treatment_description": "Cosmetic acupuncture is a natural, non-invasive treatment that enhances skin health and reduces the signs of aging.",
+        "treatment_effects": "By stimulating specific points on the face, it promotes circulation, boosts collagen production, and helps reduce wrinkles, puffiness, and fine lines. It’s a holistic approach to achieving a youthful, radiant complexion."
     },
     {
         "treatment": "Pediatric Health",
         "card_icon": "/assets/images/pediatric-health.png",
         "dialog_image": "https://images.pexels.com/photos/7653124/pexels-photo-7653124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "treatment_description": "Chinese medicine offers gentle, effective treatments for children, addressing issues like colic, allergies, sleep problems, and immune support. Using acupuncture, herbal remedies, and dietary advice, we aim to promote balanced growth and overall health in children of all ages."
+        "treatment_description": "Chinese medicine offers gentle, effective treatments for children, addressing issues like colic, allergies, sleep problems, and immune support.",
+        "treatment_effects": "Using acupuncture, herbal remedies, and dietary advice, we aim to promote balanced growth and overall health in children of all ages."
     },
     {
         "treatment": "Chronic Skin Problems",
         "card_icon": "/assets/images/skin-problems.png",
         "dialog_image": "https://images.pexels.com/photos/9442296/pexels-photo-9442296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "treatment_description": "Chinese medicine offers effective treatments for chronic skin conditions like eczema, acne, and psoriasis. Through acupuncture, herbal medicine, and dietary recommendations, we aim to balance the body’s internal systems, reduce inflammation, and promote healthy, clear skin."
+        "treatment_description": "Chinese medicine offers effective treatments for chronic skin conditions like eczema, acne, and psoriasis.",
+        "treatment_effects": "Through acupuncture, herbal medicine, and dietary recommendations, we aim to balance the body’s internal systems, reduce inflammation, and promote healthy, clear skin."
     },
     {
         "treatment": "Senior Healthcare",
         "card_icon": "/assets/images/senior-healthcare.png",
         "dialog_image": "https://images.pexels.com/photos/7551611/pexels-photo-7551611.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "treatment_description": "Chinese medicine provides a holistic approach to senior health, focusing on pain relief, mobility, and overall vitality. Through acupuncture, herbal remedies, and lifestyle guidance, we help manage age-related conditions, improve circulation, and support mental and physical well-being for a healthier, more active life."
+        "treatment_description": "Chinese medicine provides a holistic approach to senior health, focusing on pain relief, mobility, and overall vitality.",
+        "treatment_effects": "Through acupuncture, herbal remedies, and lifestyle guidance, we help manage age-related conditions, improve circulation, and support mental and physical well-being for a healthier, more active life."
     }
 ]

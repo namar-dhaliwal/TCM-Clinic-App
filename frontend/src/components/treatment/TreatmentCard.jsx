@@ -17,6 +17,7 @@ const TreatmentCard = ({ treatment }) => {
                     dialogTitle={ treatment.treatment } 
                     headerImage={ treatment.dialog_image } 
                     treatmentDescription={ treatment.treatment_description}
+                    treatmentEffects={treatment.treatment_effects}
                 />
 
                 <span className={`mt-1 w-5/12 h-0.5 bg-blue-500 group-hover:w-full ${transitionStyle}`}/>

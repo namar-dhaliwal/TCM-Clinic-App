@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IoClose } from "react-icons/io5";
 
-const TreatmentDialog = ({ dialogTitle, headerImage, treatmentDescription }) => {
+const TreatmentDialog = ({ dialogTitle, headerImage, treatmentDescription, treatmentEffects }) => {
     const [open, setOpen] = useState(false)
 
     const handleOpen = () => setOpen(true)
@@ -34,9 +34,20 @@ const TreatmentDialog = ({ dialogTitle, headerImage, treatmentDescription }) => 
                     </div>
                     
                     {/* Treatment desription */}
-                    <body className='p-8 h-1/2'>
-                        <p className='h-full overflow-y-scroll [&::-webkit-scrollbar]:hidden'>{ treatmentDescription }</p>
-                    </body>
+                    <div className='p-8 h-1/2'>
+                        <div className='overflow-y-scroll [&::-webkit-scrollbar]:hidden h-full'>
+                            <div className='text-blue-950'>
+                                <h2 className='font-semibold text-xl'>Description:</h2>
+                                <p className='mt-1'>{ treatmentDescription }</p>
+                            </div>
+
+                            {/* Treatment Effects*/}
+                            <div className='text-blue-950 mt-8'>
+                                <h2 className='font-semibold text-xl'>Effects:</h2>
+                                <p className='mt-1'>{ treatmentEffects }</p>
+                            </div>
+                        </div>
+                    </div>
                 </dialog>
             </div>
         </div>
