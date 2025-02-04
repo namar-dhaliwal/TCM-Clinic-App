@@ -6,7 +6,6 @@ import Home from './pages/Home'
 import About from './pages/AboutUs'
 import Contact from './pages/Contact'
 import Treatments from './pages/Treatments'
-import Navbar from './components/Navbar'
 import Header from './components/Header'
 
 function App() {
@@ -14,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Header />
         <div className="pages">
           <Routes>
             <Route 
