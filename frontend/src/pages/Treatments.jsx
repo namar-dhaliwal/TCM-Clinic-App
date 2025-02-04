@@ -3,10 +3,8 @@ import tempTreatmentData from '../data/tempTreatData.json'
 
 const Treatments = () => {
 
-    console.log(tempTreatmentData)
-
     return (
-        <div className="flex w-full p-8 gap-4 flex-wrap align-middle">
+        <div className="flex w-full p-8 gap-8 flex-wrap justify-center">
             {tempTreatmentData.map((treatment, index) => (
                 <TreatmentCard key={ index } treatment={ treatment }/>
             ))}
