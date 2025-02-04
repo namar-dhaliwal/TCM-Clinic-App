@@ -6,8 +6,10 @@ const TreatmentCard = ({ treatment }) => {
 
     return (
         <div className={`group flex flex-col justify-between items-center w-64 aspect-square p-8 bg-blue-950 rounded-xl bg-opacity-0 hover:bg-opacity-100 hover:shadow-2xl ${transitionStyle}`}>
-            <img src={treatment.card_icon} alt="" className={`flex justify-center w-1/3 object-center group-hover:filter group-hover:invert group-hover:brightness-0 ${transitionStyle}'+`}/>
+            {/* Treatment icon image */}
+            <img src={treatment.card_icon} alt="" className={`flex justify-center w-1/3 object-center group-hover:filter group-hover:invert group-hover:brightness-0 ${transitionStyle}'`}/>
 
+            {/* Treatment name */}
             <h1 className={`text-xl font-semibold text-blue-950 text-center group-hover:text-white ${transitionStyle}`}>
                 {treatment.treatment}
             </h1>
@@ -19,7 +21,8 @@ const TreatmentCard = ({ treatment }) => {
                     treatmentDescription={ treatment.treatment_description}
                     treatmentEffects={treatment.treatment_effects}
                 />
-
+                
+                {/* Underline of the dialog button. This is made a seperate tag so that its easier to do transitions */}
                 <span className={`mt-1 w-5/12 h-0.5 bg-blue-500 group-hover:w-full ${transitionStyle}`}/>
             </div>
         </div>

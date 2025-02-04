@@ -17,7 +17,7 @@ const TreatmentDialog = ({ dialogTitle, headerImage, treatmentDescription, treat
                 {/* Dialog black tint. */}
                 <div className='fixed bg-black inset-0 bg-opacity-50 z-40' onClick={handleClose}/>
 
-                <dialog open className='bg-white fix inset-0 w-1/3 min-w-80 h-5/6 z-40 rounded-xl overflow-hidden'>
+                <dialog open className='bg-white inset-0 w-5/12 min-w-80 h-5/6 z-40 rounded-xl overflow-hidden'>
 
                     {/* Treatment header. */}
                     <div className='flex justify-center items-center h-1/2 p-8'>
@@ -33,9 +33,10 @@ const TreatmentDialog = ({ dialogTitle, headerImage, treatmentDescription, treat
                         </button>
                     </div>
                     
-                    {/* Treatment desription */}
+                    
                     <div className='p-8 h-1/2'>
                         <div className='overflow-y-scroll [&::-webkit-scrollbar]:hidden h-full'>
+                            {/* Treatment desription */}
                             <div className='text-blue-950'>
                                 <h2 className='font-semibold text-xl'>Description:</h2>
                                 <p className='mt-1'>{ treatmentDescription }</p>
