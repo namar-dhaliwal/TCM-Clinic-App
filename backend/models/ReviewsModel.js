@@ -3,20 +3,22 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const reviewSchema = new Schema({
-    reviewRating: {
+    rating: {
         type: Number,
-        required: true
+        required: true,
+        min: 0,
+        max: 5
     },
-    reviewTitle: {
+    title: {
         type: String,
     },
-    reviewBody: {
+    body: {
         type: String,
     },
-    reviewName: {
+    name: {
         type: String,
     },
-    reviewDate: {
+    date: {
         type: String,
     }
 }, { timestamps: true })
