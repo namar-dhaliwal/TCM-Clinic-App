@@ -3,8 +3,10 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const webpageRoutes = require('./routes/webpages')
+const reviewRoutes = require('./routes/reviews')
 const bookingsRoutes = require('./routes/bookings')
 const { errorHandler } = require('./middleware/error.js')
+
 
 //invoke express app
 const app = express()
@@ -20,6 +22,7 @@ app.use((req, res, next) => {
 
 // page routes 
 app.use('/api/pages/', webpageRoutes)
+app.use('/api/pages/', reviewRoutes) // review routes, will change routing after
 app.use(`/api/bookings/`, bookingsRoutes)
 
 app.use(errorHandler)
