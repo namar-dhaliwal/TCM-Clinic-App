@@ -10,8 +10,8 @@ import About from './pages/AboutUs'
 import Contact from './pages/Contact'
 import Treatments from './pages/Treatments'
 import Header from './components/Header'
-import AdminLogin from './pages/AdminLogin'
-import AdminBookings from './pages/AdminBookings'
+import AdminLogin from './pages/admin/AdminLogin'
+import AdminBookings from './pages/admin/AdminBookings'
 
 function App() {
 	return (
