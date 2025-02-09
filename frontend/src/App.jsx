@@ -1,41 +1,36 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import './index.css'
+
+// route guards
+import { AuthenticationGuard } from './components/admin/AuthenticationGuard'
 
 // pages & components
 import Home from './pages/Home'
 import About from './pages/AboutUs'
 import Contact from './pages/Contact'
 import Treatments from './pages/Treatments'
-import Navbar from './components/Navbar'
+import Header from './components/Header'
+import AdminLogin from './pages/admin/AdminLogin'
+import AdminBookings from './pages/admin/AdminBookings'
 
 function App() {
+	return (
+		<div className='App'> 
+				<Routes>
+					<Route path='/' element={<Header />}>
+						<Route index element={<Home />} />
+						<Route path='about' element={<About />} />
+						<Route path='contact' element={<Contact />} />
+						<Route path='treatments' element={<Treatments />} />
+					</Route>
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <div className="pages">
-          <Routes>
-            <Route 
-              path="/" 
-              element={<Home />} 
-            />
-            <Route
-              path="/about"
-              element={<About />}
-            />
-            <Route
-              path="/contact"
-              element={<Contact />}
-            />
-            <Route
-              path="/treatments"
-              element={<Treatments />}
-            />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
-  );
+          <Route path='/admin'>
+            <Route path='login' element={<AdminLogin />} />
+            <Route path='bookings' element={<AuthenticationGuard component={AdminBookings} />} />
+          </Route>
+				</Routes>
+		</div>
+	)
 }
 
-export default App;
+export default App
