@@ -15,20 +15,25 @@ import PageLayout from './components/PageLayout'
 
 function App() {
 	return (
-		<div className='App'> 
-				<Routes>
-					<Route path='/' element={<PageLayout />}>
-						<Route index element={<Home />} />
-						<Route path='about' element={<About />} />
-						<Route path='contact' element={<Contact />} />
-						<Route path='treatments' element={<Treatments />} />
-					</Route>
+		<div className='App'>
+			<Routes>
+				<Route path='/' element={<PageLayout />}>
+					<Route index element={<Home />} />
+					<Route path='about' element={<About />} />
+					<Route path='contact' element={<Contact />} />
+					<Route path='treatments' element={<Treatments />} />
+				</Route>
 
-          <Route path='/admin'>
-            <Route path='login' element={<AdminLogin />} />
-            <Route path='bookings' element={<AuthenticationGuard component={AdminBookings} />} />
-          </Route>
-				</Routes>
+				<Route path='/admin'>
+					<Route path='login' element={<AdminLogin />} />
+					<Route
+						path='bookings'
+						element={
+							<AuthenticationGuard component={AdminBookings} />
+						}
+					/>
+				</Route>
+			</Routes>
 		</div>
 	)
 }

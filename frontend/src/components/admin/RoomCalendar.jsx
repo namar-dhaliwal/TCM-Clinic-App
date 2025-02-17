@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import {
 	format,
@@ -45,7 +45,7 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 	const [isEventModalOpen, setIsEventModalOpen] = useState(false)
 	const [eventData, setEventData] = useState(null)
 	const [selectedSlotStart, setSelectedSlot] = useState(null)
-	const currentRoom = state.rooms.find((room) => room.id === roomId)
+	const currentRoom = state.find((room) => room.id === roomId)
 
 	// custom calendar components
 	const components = {
