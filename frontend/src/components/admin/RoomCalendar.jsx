@@ -8,7 +8,6 @@ import {
 	startOfWeek,
 	endOfWeek,
 	getDay,
-	set,
 } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
@@ -74,8 +73,8 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 	}
 
 	const handleEventDoubleClick = (event) => {
-		setIsEventModalOpen(true)
 		setEventData(event)
+		setIsEventModalOpen(true)
 	}
 
 	return (

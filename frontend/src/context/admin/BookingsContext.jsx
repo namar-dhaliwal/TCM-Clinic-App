@@ -1,45 +1,46 @@
 import { createContext, useContext, useReducer, useEffect } from 'react'
 
+import { getBookings } from '../../data/bookingsData'
+import { data } from 'react-router-dom'
+
 const BookingsContext = createContext()
 
 const initialStateReworked = [
 	{
 		id: 'room-1',
 		name: 'Room 1',
-		bookings: [
-			{
-				id: 1,
-				start: new Date(2025, 1, 2, 10, 0),
-				end: new Date(2025, 1, 2, 11, 0),
-				data: {
-					doctorName: 'Dr. John Doe',
-					patientName: 'John Smith',
-					otherNotes: 'Patient has a history of high blood pressure',
-				},
+		bookings: [{
+			id: 1,
+			start: new Date(2025, 1, 17, 9, 0),
+			end: new Date(2025, 1, 17, 9, 30),
+			data: {
+				doctorName: 'Dr. John Doe',
+				patientName: 'Jane Doe',
+				otherNotes: 'This is a test booking',
 			},
-		],
+		}],
 	},
 	{
 		id: 'room-2',
 		name: 'Room 2',
-		bookings: [
-			{
-				id: 1,
-				start: new Date(2025, 1, 2, 13, 0),
-				end: new Date(2025, 1, 2, 14, 0),
-				data: {
-					doctorName: 'Dr. Jane Doe',
-					patientName: 'Jane Smith',
-					otherNotes: 'Patient has a history of low blood pressure',
-				},
-			},
-		],
+		bookings: [{}],
 	},
 ]
 
 const BookingsReducer = (state, action) => {
 	switch (action.type) {
+		case 'SET_BOOKINGS':
+			return state.map((room) => {
+				if (room.id === action.payload.roomId) {
+					return {
+						...room,
+						bookings: action.payload.bookings,
+					}
+				}
+				return room
+			})
 		case 'ADD_BOOKING':
+			
 			return state.map((room) => {
 				if (room.id === action.payload.roomId) {
 					return {
@@ -81,6 +82,17 @@ const BookingsReducer = (state, action) => {
 
 const BookingsProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(BookingsReducer, initialStateReworked)
+
+	useEffect(() => {
+		const getInitialBookings = async () => {
+			const bookings = await getBookings()
+			dispatch({
+				type: 'SET_BOOKINGS',
+				payload: { roomId: "room-1", bookings },
+			})
+		}
+		getInitialBookings()
+	}, [])
 
 	return (
 		<BookingsContext.Provider value={{ state, dispatch }}>

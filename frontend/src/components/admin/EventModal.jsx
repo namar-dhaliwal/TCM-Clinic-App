@@ -3,6 +3,8 @@ import Modal from 'react-modal'
 
 import { useBookingsContext } from '../../context/admin/BookingsContext'
 
+import { updateBooking, removeBooking } from '../../data/bookingsData'
+
 const customStyles = {
 	content: {
 		top: '50%',
@@ -35,6 +37,9 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 
 	const handleDelete = () => {
 		onClose()
+
+		removeBooking(event.id)
+
 		dispatch({
 			type: 'DELETE_BOOKING',
 			payload: { roomId, bookingId: event.id },
@@ -42,18 +47,22 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 	}
 
 	const handleUpdateBooking = () => {
+		const updatedBooking = {
+			...event,
+			data: {
+				doctorName: formData.doctorName,
+				patientName: formData.patientName,
+				otherNotes: formData.otherNotes,
+			},
+		}
+
+		updateBooking(updatedBooking)
+
 		dispatch({
 			type: 'EDIT_BOOKING',
 			payload: {
 				roomId,
-				booking: {
-					...event,
-					data: {
-						doctorName: formData.doctorName,
-						patientName: formData.patientName,
-						otherNotes: formData.otherNotes,
-					},
-				},
+				booking: updatedBooking,
 			},
 		})
 		setIsEditing(false)

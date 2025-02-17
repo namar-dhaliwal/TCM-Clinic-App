@@ -4,6 +4,8 @@ import Modal from 'react-modal'
 
 import { useBookingsContext } from '../../context/admin/BookingsContext'
 
+import { addBooking } from '../../data/bookingsData'
+
 const customStyles = {
 	content: {
 		top: '50%',
@@ -56,6 +58,8 @@ const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 				otherNotes
 			},
 		}
+
+		addBooking(newBooking)
 
 		dispatch({
 			type: 'ADD_BOOKING',
