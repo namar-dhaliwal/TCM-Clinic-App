@@ -48,14 +48,12 @@ const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 		e.preventDefault()
 
 		const newBooking = {
-			id:
-				state.rooms.find((room) => room.id === roomId).bookings.length +
-				1,
 			start,
 			end,
 			data: {
 				doctorName,
 				patientName,
+				otherNotes
 			},
 		}
 
