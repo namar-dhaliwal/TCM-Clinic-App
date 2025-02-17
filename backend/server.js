@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const webpageRoutes = require("./routes/webpages");
 const reviewRoutes = require("./routes/reviews");
@@ -9,6 +10,8 @@ const { errorHandler } = require("./middleware/error.js");
 
 //invoke express app
 const app = express();
+
+app.use(cors());
 
 // more middlemare, vid 3 10:30
 app.use(express.json());
