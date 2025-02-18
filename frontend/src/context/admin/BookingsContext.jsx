@@ -37,7 +37,6 @@ const BookingsReducer = (state, action) => {
 				return room
 			})
 		case 'ADD_BOOKING':
-			
 			return state.map((room) => {
 				if (room.id === action.payload.roomId) {
 					return {

@@ -25,7 +25,7 @@ const durationValues = [15, 30, 60, 90, 120]
 
 Modal.setAppElement('#root')
 
-const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
+const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 	const { state, dispatch } = useBookingsContext()
 	const [doctorName, setDoctorName] = useState('')
 	const [patientName, setPatientName] = useState('')
@@ -46,10 +46,11 @@ const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 		setEnd(newEnd)
 	}, [start, duration])
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 
 		const newBooking = {
+			roomId,
 			start,
 			end,
 			data: {
@@ -59,15 +60,18 @@ const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 			},
 		}
 
-		addBooking(newBooking)
+		const addedBooking = await addBooking(newBooking)
+		console.log(addedBooking)
 
 		dispatch({
 			type: 'ADD_BOOKING',
 			payload: {
 				roomId,
-				booking: newBooking,
+				booking: addedBooking,
 			},
 		})
+
+		console.log(state)
 
 		onClose()
 		setPatientName('')
@@ -171,4 +175,4 @@ const BookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 	)
 }
 
-export default BookingModal
+export default CreateBookingModal

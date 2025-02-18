@@ -38,7 +38,12 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 	const handleDelete = () => {
 		onClose()
 
-		removeBooking(event.id)
+		const data = {
+			roomId,
+			bookingId: event.id,
+		}
+
+		removeBooking(data)
 
 		dispatch({
 			type: 'DELETE_BOOKING',
@@ -54,6 +59,7 @@ const EventModal = ({ event, isOpen, onClose, roomId }) => {
 				patientName: formData.patientName,
 				otherNotes: formData.otherNotes,
 			},
+			roomId
 		}
 
 		updateBooking(updatedBooking)

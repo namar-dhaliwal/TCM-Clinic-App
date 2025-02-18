@@ -12,9 +12,9 @@ export const fetchBookings = async (roomName) => {
     }
 }
 
-export const createBooking = async (booking) => {
+export const createBooking = async (data) => {
     try {
-        const response = await axios.post(API_BASE_URL, booking);
+        const response = await axios.post(`${API_BASE_URL}/${data.roomName}`, data.booking);
         return response;
     } catch (err) {
         console.error(err);
@@ -22,9 +22,9 @@ export const createBooking = async (booking) => {
     }
 }
 
-export const patchBooking = async (booking) => {
+export const patchBooking = async (data) => {
     try {
-        const response = await axios.patch(`${API_BASE_URL}/${booking._id}`, booking);
+        const response = await axios.patch(`${API_BASE_URL}/${data.roomName}/${data.booking.id}`, data.booking);
         return response;
     } catch (err) {
         console.error(err);
@@ -32,9 +32,9 @@ export const patchBooking = async (booking) => {
     }
 }
 
-export const deleteBooking = async (bookingId) => {
+export const deleteBooking = async (data) => {
     try {
-        const response = await axios.delete(`${API_BASE_URL}/${bookingId}`);
+        const response = await axios.delete(`${API_BASE_URL}/${data.roomName}/${data.bookingId}`);
         return response;
     } catch (err) {
         console.error(err);

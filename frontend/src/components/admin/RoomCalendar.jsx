@@ -14,7 +14,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './RoomCalendar.css'
 
 // components
-import BookingModal from './BookingModal'
+import CreateBookingModal from './CreateBookingModal'
 
 // context
 import { useDateContext } from '../../context/admin/DateContext'
@@ -116,7 +116,7 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 				timeslots={4}
 				onDoubleClickEvent={handleEventDoubleClick}
 			/>
-			<BookingModal
+			<CreateBookingModal
 				isOpen={isBookingModalOpen}
 				onClose={() => setIsBookingModalOpen(false)}
 				defaultStart={selectedSlotStart}
