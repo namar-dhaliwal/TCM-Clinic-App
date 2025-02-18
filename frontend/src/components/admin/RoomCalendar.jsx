@@ -22,10 +22,13 @@ import { useBookingsContext } from '../../context/admin/BookingsContext'
 import CustomEvent from './CustomEvent'
 import EventModal from './EventModal'
 
+// dara services
+import { getBookings } from '../../data/bookingsData'
+
+// react-big-calendar stuff
 const locales = {
 	'en-Us': enUS,
 }
-
 const localizer = dateFnsLocalizer({
 	format,
 	parse,
@@ -39,12 +42,23 @@ const localizer = dateFnsLocalizer({
 
 const RoomCalendar = ({ roomId, view, setView }) => {
 	const { selectedDate, setSelectedDate } = useDateContext()
-	const { state } = useBookingsContext()
+	const { state, dispatch } = useBookingsContext()
 	const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
 	const [isEventModalOpen, setIsEventModalOpen] = useState(false)
 	const [eventData, setEventData] = useState(null)
 	const [selectedSlotStart, setSelectedSlot] = useState(null)
 	const currentRoom = state.find((room) => room.id === roomId)
+
+	useEffect(() => {
+			const getInitialBookings = async () => {
+				const bookings = await getBookings(roomId)
+				dispatch({
+					type: 'SET_BOOKINGS',
+					payload: { roomId, bookings },
+				})
+			}
+			getInitialBookings()
+		}, [])
 
 	// custom calendar components
 	const components = {

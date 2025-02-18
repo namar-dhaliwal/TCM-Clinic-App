@@ -1,8 +1,9 @@
 import { fetchBookings, createBooking, patchBooking, deleteBooking } from "../services/BookingService";
 
-export const getBookings = async () => {
+export const getBookings = async (roomId) => {
     try {
-        const response = await fetchBookings();
+        const roomName = `bookingsRoom${roomId}`;
+        const response = await fetchBookings(roomName);
         return response.data.map((booking) => {
             return {
                 id: booking._id,

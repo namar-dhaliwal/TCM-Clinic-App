@@ -27,12 +27,12 @@ const Admin = () => {
 					</div>
 					<div className='flex flex-wrap w-full justify-evenly gap-2'>
 						<RoomCalendar
-							roomId='room-1'
+							roomId='1'
 							view={view}
 							setView={setView}
 						/>
 						<RoomCalendar
-							roomId='room-2'
+							roomId='2'
 							view={view}
 							setView={setView}
 						/>

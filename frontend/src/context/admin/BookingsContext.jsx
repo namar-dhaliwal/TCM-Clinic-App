@@ -1,13 +1,10 @@
 import { createContext, useContext, useReducer, useEffect } from 'react'
 
-import { getBookings } from '../../data/bookingsData'
-import { data } from 'react-router-dom'
-
 const BookingsContext = createContext()
 
 const initialStateReworked = [
 	{
-		id: 'room-1',
+		id: '1',
 		name: 'Room 1',
 		bookings: [{
 			id: 1,
@@ -21,7 +18,7 @@ const initialStateReworked = [
 		}],
 	},
 	{
-		id: 'room-2',
+		id: '2',
 		name: 'Room 2',
 		bookings: [{}],
 	},
@@ -82,17 +79,6 @@ const BookingsReducer = (state, action) => {
 
 const BookingsProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(BookingsReducer, initialStateReworked)
-
-	useEffect(() => {
-		const getInitialBookings = async () => {
-			const bookings = await getBookings()
-			dispatch({
-				type: 'SET_BOOKINGS',
-				payload: { roomId: "room-1", bookings },
-			})
-		}
-		getInitialBookings()
-	}, [])
 
 	return (
 		<BookingsContext.Provider value={{ state, dispatch }}>

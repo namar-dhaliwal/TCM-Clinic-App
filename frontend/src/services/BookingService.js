@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:4000/api/bookings'
 
-export const fetchBookings = async () => {
+export const fetchBookings = async (roomName) => {
     try {
-        const response = await axios.get(API_BASE_URL);
+        const response = await axios.get(`${API_BASE_URL}/${roomName}`);
         return response;
     } catch (err) {
         console.error(err);
