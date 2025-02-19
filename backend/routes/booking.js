@@ -1,13 +1,13 @@
 const express = require("express");
 const Booking = require("../models/Booking");
 const router = express.Router();
-const getBookingModel = require("../models/Booking")
+const getBookingModel = require("../models/Booking");
 
 //GET all bookings for a room
 router.get("/:roomName", async (req, res) => {
   try {
-    const roomName = req.params.roomName
-    const Booking = await getBookingModel(roomName)
+    const roomName = req.params.roomName;
+    const Booking = await getBookingModel(roomName);
 
     const bookings = await Booking.find();
     res.json(bookings);
@@ -33,7 +33,8 @@ router.get("/:date", async (req, res) => {
 //POST a new booking
 router.post("/:roomName", async (req, res) => {
   try {
-    const { patientName, doctorName, startTime, endTime } = req.body;
+    const { patientName, doctorName, startTime, endTime, extraNotes } =
+      req.body;
     const roomName = req.params.roomName;
     const Booking = await getBookingModel(roomName);
 
@@ -42,6 +43,7 @@ router.post("/:roomName", async (req, res) => {
       doctorName,
       startTime,
       endTime,
+      extraNotes,
     });
     await newBooking.save();
     res.status(201).json(newBooking);
