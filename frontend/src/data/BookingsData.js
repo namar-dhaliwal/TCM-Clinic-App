@@ -51,7 +51,7 @@ export const addBooking = async (booking) => {
 		}
 		return dataToReturn
 	} catch (err) {
-		console.error(err)
+		throw Error(err.response?.data?.error)
 	}
 }
 

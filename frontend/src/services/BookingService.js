@@ -17,7 +17,6 @@ export const createBooking = async (data) => {
         const response = await axios.post(`${API_BASE_URL}/${data.roomName}`, data.booking);
         return response;
     } catch (err) {
-        console.error(err);
         throw err;
     }
 }

@@ -26,13 +26,14 @@ const durationValues = [15, 30, 60, 90, 120]
 Modal.setAppElement('#root')
 
 const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
-	const { state, dispatch } = useBookingsContext()
+	const { dispatch } = useBookingsContext()
 	const [doctorName, setDoctorName] = useState('')
 	const [patientName, setPatientName] = useState('')
 	const [start, setStart] = useState(defaultStart ? defaultStart : new Date())
 	const [duration, setDuration] = useState(30)
 	const [end, setEnd] = useState(new Date(defaultStart + 30 * 60000))
 	const [otherNotes, setOtherNotes] = useState('')
+	const [error, setError] = useState('')
 
 	useEffect(() => {
 		if (defaultStart) {
@@ -56,21 +57,36 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 			data: {
 				doctorName,
 				patientName,
-				otherNotes
+				otherNotes,
 			},
 		}
 
-		const addedBooking = await addBooking(newBooking)
-		console.log(addedBooking)
+		try {
+			const addedBooking = await addBooking(newBooking)
 
-		dispatch({
-			type: 'ADD_BOOKING',
-			payload: {
-				roomId,
-				booking: addedBooking,
-			},
-		})
+			dispatch({
+				type: 'ADD_BOOKING',
+				payload: {
+					roomId,
+					booking: addedBooking,
+				},
+			})
 
+			onClose()
+			setPatientName('')
+			setDoctorName('')
+			setOtherNotes('')
+		} catch (err) {
+			setError(err.message)
+
+			setTimeout(() => {
+				setError('')
+			}, 5000)
+		}
+	}
+
+	const handleCancel = (e) => {
+		e.preventDefault()
 		onClose()
 		setPatientName('')
 		setDoctorName('')
@@ -83,9 +99,14 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 			onRequestClose={onClose}
 			contentLabel='Add Booking'
 			style={customStyles}>
-			<h2 className='font-bold underline text-center mb-8 text-xl'>
+			<h2 className='font-bold underline text-center mb-2 text-xl'>
 				Add Booking
 			</h2>
+			{error && (
+				<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4'>
+					{error}
+				</div>
+			)}
 			<form onSubmit={handleSubmit} className='flex flex-col'>
 				<div className='flex gap-8'>
 					<div className='flex flex-col gap-1 '>
@@ -117,7 +138,7 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 								onChange={(e) =>
 									setStart(new Date(e.target.value))
 								}
-								className='border border-black rounded-md flex-1 pl-1 text-right'
+								className={`border border-black rounded-md flex-1 pl-1 text-right ${error ? 'bg-red-100 border border-red-400 text-red-700' : ''}`}
 							/>
 						</div>
 						<div className='flex gap-2'>
@@ -127,7 +148,7 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 								onChange={(e) =>
 									setDuration(Number(e.target.value))
 								}
-								className='border border-black rounded-md flex-1 pl-1 text-right'>
+								className={`border border-black rounded-md flex-1 pl-1 text-right ${error ? 'bg-red-100 border border-red-400 text-red-700' : ''}`}>
 								{durationValues.map((value) => (
 									<option key={value} value={value}>
 										{value}
@@ -147,7 +168,9 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 					</div>
 
 					<div className='flex flex-col'>
-						<label className='text-center underline'>Other Notes</label>
+						<label className='text-center underline'>
+							Other Notes
+						</label>
 						<textarea
 							value={otherNotes}
 							onChange={(e) => setOtherNotes(e.target.value)}
@@ -164,7 +187,7 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 					</button>
 					<button
 						type='button'
-						onClick={onClose}
+						onClick={handleCancel}
 						className='border rounded-md border-black px-4 py-1 '>
 						Cancel
 					</button>
