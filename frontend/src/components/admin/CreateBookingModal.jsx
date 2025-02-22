@@ -5,6 +5,7 @@ import Modal from 'react-modal'
 import { useBookingsContext } from '../../context/admin/BookingsContext'
 
 import { addBooking } from '../../data/BookingsData'
+import CustomDatetimeSelect from './CustomDateTimeSelect'
 
 const customStyles = {
 	content: {
@@ -29,7 +30,10 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 	const { dispatch } = useBookingsContext()
 	const [doctorName, setDoctorName] = useState('')
 	const [patientName, setPatientName] = useState('')
-	const [start, setStart] = useState(defaultStart ? defaultStart : new Date())
+	const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'))
+	const [startHour, setStartHour] = useState('09')
+	const [startMinutes, setStartMinutes] = useState('00')
+	const [startPeriod, setStartPeriod] = useState('AM')
 	const [duration, setDuration] = useState(30)
 	const [end, setEnd] = useState(new Date(defaultStart + 30 * 60000))
 	const [otherNotes, setOtherNotes] = useState('')
@@ -37,22 +41,38 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 
 	useEffect(() => {
 		if (defaultStart) {
-			setStart(defaultStart)
+			setDate(format(defaultStart, 'yyyy-MM-dd'))
+			setStartHour(
+				String(
+					defaultStart.getHours() -
+						(defaultStart.getHours() > 12 ? 12 : 0)
+				).padStart(2, '0')
+			)
+			setStartMinutes(String(defaultStart.getMinutes()).padStart(2, '0'))
+			setStartPeriod(defaultStart.getHours() >= 12 ? 'PM' : 'AM')
 		}
 	}, [defaultStart])
 
 	useEffect(() => {
-		const newEnd = new Date(start)
-		newEnd.setMinutes(start.getMinutes() + duration)
-		setEnd(newEnd)
-	}, [start, duration])
+		setEnd(new Date(getDateTime().getTime() + duration * 60000))
+	}, [date, startHour, startMinutes, startPeriod, duration])
+
+	const getDateTime = () => {
+		let hours24 = parseInt(startHour, 10)
+		if (startPeriod === 'PM' && hours24 !== 12) hours24 += 12
+		if (startPeriod === 'AM' && hours24 === 12) hours24 = 0
+
+		return new Date(
+			`${date}T${String(hours24).padStart(2, '0')}:${startMinutes}`
+		)
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
 		const newBooking = {
 			roomId,
-			start,
+			start: getDateTime(),
 			end,
 			data: {
 				doctorName,
@@ -91,6 +111,8 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 		setPatientName('')
 		setDoctorName('')
 		setOtherNotes('')
+		setDuration(30)
+		setError('')
 	}
 
 	return (
@@ -111,6 +133,16 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 				<div className='flex gap-8'>
 					<div className='flex flex-col gap-1 '>
 						<div className='flex gap-2'>
+							<label>Date:</label>
+							<input
+								type='date'
+								value={date}
+								readOnly
+								disabled
+								className='border border-gray-400 text-gray-500 rounded-md pl-1 text-center flex-1'
+							/>
+						</div>
+						<div className='flex gap-2'>
 							<label>Doctor: </label>
 							<input
 								type='text'
@@ -130,17 +162,17 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 								className='border border-black rounded-md flex-1 pl-1'
 							/>
 						</div>
-						<div className='flex gap-2'>
-							<label>Start Time: </label>
-							<input
-								type='datetime-local'
-								value={format(start, "yyyy-MM-dd'T'HH:mm")}
-								onChange={(e) =>
-									setStart(new Date(e.target.value))
-								}
-								className={`border border-black rounded-md flex-1 pl-1 text-right ${error ? 'bg-red-100 border border-red-400 text-red-700' : ''}`}
-							/>
-						</div>
+						<CustomDatetimeSelect
+							date={date}
+							setDate={setDate}
+							hour={startHour}
+							setHour={setStartHour}
+							minutes={startMinutes}
+							setMinutes={setStartMinutes}
+							period={startPeriod}
+							setPeriod={setStartPeriod}
+							error={error}
+						/>
 						<div className='flex gap-2'>
 							<label>Duration (minutes): </label>
 							<select
@@ -148,7 +180,11 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 								onChange={(e) =>
 									setDuration(Number(e.target.value))
 								}
-								className={`border border-black rounded-md flex-1 pl-1 text-right ${error ? 'bg-red-100 border border-red-400 text-red-700' : ''}`}>
+								className={`border border-black rounded-md flex-1 pl-1 text-center ${
+									error
+										? 'bg-red-100 border border-red-400 text-red-700'
+										: ''
+								}`}>
 								{durationValues.map((value) => (
 									<option key={value} value={value}>
 										{value}
@@ -156,13 +192,14 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 								))}
 							</select>
 						</div>
-						<div className='flex gap-2'>
-							<label>End Time: </label>
+						<div className='flex gap-2 mt-2'>
+							<label>End: </label>
 							<input
 								type='datetime-local'
 								value={format(end, "yyyy-MM-dd'T'HH:mm")}
 								readOnly
-								className='border border-gray-400 rounded-md flex-1 pl-3 text-center'
+								disabled
+								className='border border-gray-400 text-gray-500 rounded-md flex-1 pl-3 text-center'
 							/>
 						</div>
 					</div>
