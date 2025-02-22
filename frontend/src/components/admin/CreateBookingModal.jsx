@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 
 import { useBookingsContext } from '../../context/admin/BookingsContext'
 
-import { addBooking } from '../../data/bookingsData'
+import { addBooking } from '../../data/BookingsData'
 
 const customStyles = {
 	content: {
@@ -70,8 +70,6 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 				booking: addedBooking,
 			},
 		})
-
-		console.log(state)
 
 		onClose()
 		setPatientName('')

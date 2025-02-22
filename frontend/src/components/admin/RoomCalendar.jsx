@@ -23,7 +23,7 @@ import CustomEvent from './CustomEvent'
 import EventModal from './EventModal'
 
 // dara services
-import { getBookings } from '../../data/bookingsData'
+import { getBookings } from '../../data/BookingsData'
 
 // react-big-calendar stuff
 const locales = {

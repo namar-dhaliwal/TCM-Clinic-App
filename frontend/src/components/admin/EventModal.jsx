@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 
 import { useBookingsContext } from '../../context/admin/BookingsContext'
 
-import { updateBooking, removeBooking } from '../../data/bookingsData'
+import { updateBooking, removeBooking } from '../../data/BookingsData'
 
 const customStyles = {
 	content: {
