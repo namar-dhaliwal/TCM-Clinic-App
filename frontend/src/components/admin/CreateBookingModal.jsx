@@ -74,6 +74,7 @@ const CreateBookingModal = ({ isOpen, onClose, defaultStart, roomId }) => {
 		onClose()
 		setPatientName('')
 		setDoctorName('')
+		setOtherNotes('')
 	}
 
 	return (
