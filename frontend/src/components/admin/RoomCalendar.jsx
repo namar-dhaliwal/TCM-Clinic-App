@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import {
 	format,
@@ -8,14 +8,13 @@ import {
 	startOfWeek,
 	endOfWeek,
 	getDay,
-	set,
 } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './RoomCalendar.css'
 
 // components
-import BookingModal from './BookingModal'
+import CreateBookingModal from './CreateBookingModal'
 
 // context
 import { useDateContext } from '../../context/admin/DateContext'
@@ -23,10 +22,13 @@ import { useBookingsContext } from '../../context/admin/BookingsContext'
 import CustomEvent from './CustomEvent'
 import EventModal from './EventModal'
 
+// dara services
+import { getBookings } from '../../data/BookingsData'
+
+// react-big-calendar stuff
 const locales = {
 	'en-Us': enUS,
 }
-
 const localizer = dateFnsLocalizer({
 	format,
 	parse,
@@ -40,12 +42,23 @@ const localizer = dateFnsLocalizer({
 
 const RoomCalendar = ({ roomId, view, setView }) => {
 	const { selectedDate, setSelectedDate } = useDateContext()
-	const { state } = useBookingsContext()
+	const { state, dispatch } = useBookingsContext()
 	const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
 	const [isEventModalOpen, setIsEventModalOpen] = useState(false)
 	const [eventData, setEventData] = useState(null)
 	const [selectedSlotStart, setSelectedSlot] = useState(null)
-	const currentRoom = state.rooms.find((room) => room.id === roomId)
+	const currentRoom = state.find((room) => room.id === roomId)
+
+	useEffect(() => {
+		const getInitialBookings = async () => {
+			const bookings = await getBookings(roomId)
+			dispatch({
+				type: 'SET_BOOKINGS',
+				payload: { roomId, bookings },
+			})
+		}
+		getInitialBookings()
+	}, [])
 
 	// custom calendar components
 	const components = {
@@ -74,8 +87,8 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 	}
 
 	const handleEventDoubleClick = (event) => {
-		setIsEventModalOpen(true)
 		setEventData(event)
+		setIsEventModalOpen(true)
 	}
 
 	return (
@@ -95,15 +108,16 @@ const RoomCalendar = ({ roomId, view, setView }) => {
 				onSelectSlot={handleSelectSlot}
 				views={['month', 'week', 'day']}
 				min={new Date(2025, 0, 1, 8, 0, 0)}
-				max={new Date(2025, 0, 1, 19, 0, 0)}
+				max={new Date(2025, 0, 1, 18, 0, 0)}
 				style={{ height: 600 }}
 				className='lg:min-w-[36rem] z-0'
 				components={components}
 				step={15}
-				timeslots={4}
+				timeslots={2}
 				onDoubleClickEvent={handleEventDoubleClick}
+				dayLayoutAlgorithm='no-overlap'
 			/>
-			<BookingModal
+			<CreateBookingModal
 				isOpen={isBookingModalOpen}
 				onClose={() => setIsBookingModalOpen(false)}
 				defaultStart={selectedSlotStart}

@@ -9,27 +9,31 @@ import Home from './pages/Home'
 import About from './pages/AboutUs'
 import Contact from './pages/Contact'
 import Treatments from './pages/Treatments'
-import Header from './components/Header'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminBookings from './pages/admin/AdminBookings'
 import PageLayout from './components/PageLayout'
 
 function App() {
 	return (
-		<div className='App'> 
-				<Routes>
-					<Route path='/' element={<PageLayout />}>
-						<Route index element={<Home />} />
-						<Route path='about' element={<About />} />
-						<Route path='contact' element={<Contact />} />
-						<Route path='treatments' element={<Treatments />} />
-					</Route>
+		<div className='App'>
+			<Routes>
+				<Route path='/' element={<PageLayout />}>
+					<Route index element={<Home />} />
+					<Route path='about' element={<About />} />
+					<Route path='contact' element={<Contact />} />
+					<Route path='treatments' element={<Treatments />} />
+				</Route>
 
-          <Route path='/admin'>
-            <Route path='login' element={<AdminLogin />} />
-            <Route path='bookings' element={<AuthenticationGuard component={AdminBookings} />} />
-          </Route>
-				</Routes>
+				<Route path='/admin'>
+					<Route path='login' element={<AdminLogin />} />
+					<Route
+						path='bookings'
+						element={
+							<AuthenticationGuard component={AdminBookings} />
+						}
+					/>
+				</Route>
+			</Routes>
 		</div>
 	)
 }
