@@ -17,30 +17,34 @@ const bookingSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  extraNotes: {
+    type: String,
+    default: "",
+  },
 });
 
 /**
  * Gets a particular collection/model to work with based on roomName
- * 
+ *
  * @param {*} roomName Name of a collection of bookings
  * @returns A Booking collection/model
  */
 const getBookingCollection = async (roomName) => {
-  const collections = await mongoose.connection.db.listCollections().toArray()
+  const collections = await mongoose.connection.db.listCollections().toArray();
   const collectionNames = collections.map((collection) => collection.name);
 
   // Making sure roomName is in the correct format
-  const bookingsRoomPattern = /^bookingsRoom\d+$/
+  const bookingsRoomPattern = /^bookingsRoom\d+$/;
   if (!bookingsRoomPattern.test(roomName)) {
-    throw new Error('The room name does not match the pattern.')
+    throw new Error("The room name does not match the pattern.");
   }
 
   // Checking if the collection exists
   if (collectionNames.includes(roomName)) {
-    return mongoose.model("Booking", bookingSchema, roomName)
+    return mongoose.model("Booking", bookingSchema, roomName);
   } else {
-    throw new Error('The room (collection) does not exist.')
+    throw new Error("The room (collection) does not exist.");
   }
-}
+};
 
 module.exports = getBookingCollection;
