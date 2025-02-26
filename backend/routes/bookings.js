@@ -1,29 +1,37 @@
-const express = require('express')
+const express = require('express');
 const {
-    checkRequiredPermissions,
-    validateAccessToken
-} = require('../middleware/auth0.js')
-const { AdminPermissions } = require('../models/AdminPermissions.js')
+  getBookings,
+  createBooking,
+  updateBooking,
+  deleteBooking,
+} = require('../controllers/bookingController');
 
-const bookingsRouter = express.Router()
+const router = express.Router();
 
-// Dummy routes for testing user auth and permissions
-bookingsRouter.get('/public', (req, res) => {
-    const message = "This is a public endpoint"
+//GET all bookings for a room
+router.get('/:roomName', getBookings);
 
-    res.status(200).json(message)
-})
+// legacy code, not working with new date format
+//GET bookings by date
+/*
+router.get("/:date", async (req, res) => {
+  try {
+    const { date } = req.params;
+    const bookings = await Booking.find({ date: new Date(date) });
+    res.json(bookings);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+*/
 
-bookingsRouter.get('/protected', validateAccessToken, (req, res) => {
-    const message = "This is a protected endpoint"
+//POST a new booking
+router.post('/:roomName', createBooking);
 
-    res.status(200).json(message)
-})
+//PATCH - Update a booking
+router.patch('/:roomName/:id', updateBooking);
 
-bookingsRouter.get('/admin', validateAccessToken, checkRequiredPermissions([AdminPermissions.Read]), (req, res) => {
-    const message = "This is a admin endpoint"
+//DELETE a booking
+router.delete('/:roomName/:id', deleteBooking);
 
-    res.status(200).json(message)
-})
-
-module.exports = bookingsRouter
+module.exports = router;
