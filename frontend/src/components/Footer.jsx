@@ -3,10 +3,6 @@ import WechatIcon from "../assets/icons/wechat.png";
 const Footer = () => {
   return (
     <footer className="flex flex-col items-center justify-center text-lg">
-      <div className="flex justify-around gap-10">
-        <p>64 Queen St. Warkworth</p>
-        <p>Monday to Saturday 9:00 - 5:30 | Sunday 8:15 - 1:00</p>
-      </div>
 
       <div className="flex gap-10 pr-10 mt-5">
         <a
